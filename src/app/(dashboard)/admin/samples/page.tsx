@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useMemo } from 'react';
 import { Card } from '@/components/ui/card';
@@ -11,7 +11,6 @@ import { useShipping } from '@/hooks/useSettings';
 import { Order, OrderStatus } from '@/types';
 import { Search, FlaskConical, Building2, User, Phone, MapPin, Eye, Printer, MessageSquare, Calendar, Zap, Loader2, Clock } from 'lucide-react';
 import { format } from 'date-fns';
-import { fr } from 'date-fns/locale';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 import { addAuditLog } from '@/lib/logger';
@@ -42,28 +41,32 @@ export default function AdminSamplesPage() {
 
   const handleUpdateStatus = async (id: string, newStatus: OrderStatus, tracking?: string) => {
     const currentSample = samples.find(s => s.id === id);
-    await updateOrderStatus(id, newStatus, tracking);
-    if (selectedSample?.id === id) {
+    
+    try {
+      await updateOrderStatus(id, newStatus, tracking);
+      
       const timestamp = new Date().toISOString();
-      setSelectedSample(prev => prev ? { ...prev, status: newStatus, trackingNumber: tracking ?? prev.trackingNumber, statusHistory: [...(prev.statusHistory || []), { status: newStatus, timestamp }] } : null);
-    }
-    if (false) { // placeholder
-      void 0;
+      
+      // تسجيل النشاط في السجلات
+      if (currentSample) {
+        addAuditLog('sample', 'تحديث حالة', `تغيير حالة عينة ${currentSample.companyName} إلى ${newStatus}`);
       }
-      return s;
-    }));
-    
-    if (currentSample) {
-      addAuditLog('sample', 'تحديث حالة', `تغيير حالة عينة ${currentSample.companyName} إلى ${newStatus}`);
-    }
-    
-    if (selectedSample?.id === id) {
-      setSelectedSample(prev => prev ? { 
-        ...prev, 
-        status: newStatus, 
-        statusHistory: [...(prev.statusHistory || []), { status: newStatus, timestamp }],
-        trackingNumber: tracking || prev.trackingNumber
-      } : null);
+
+      // تحديث حالة العينة المختارة المعروضة في النافذة المنبثقة (Modal)
+      if (selectedSample?.id === id) {
+        setSelectedSample(prev => prev ? { 
+          ...prev, 
+          status: newStatus, 
+          trackingNumber: tracking ?? prev.trackingNumber, 
+          statusHistory: [...(prev.statusHistory || []), { status: newStatus, timestamp }] 
+        } : null);
+      }
+    } catch (error) {
+      toast({
+        title: "خطأ في التحديث",
+        description: "فشل تغيير حالة العينة، يرجى المحاولة لاحقاً",
+        variant: "destructive"
+      });
     }
   };
 
@@ -253,7 +256,7 @@ export default function AdminSamplesPage() {
                    <div className="p-4 bg-teal/10 rounded-xl border border-teal/20 space-y-3">
                      <div className="flex items-center gap-3">
                        <Zap className="w-5 h-5 text-teal animate-pulse" />
-                       <p className="text-xs font-bold">تسجيل سريع مع {activeProvider.name}</p>
+                       <p className="text-xs font-bold">تسجيل سريع مع {activeProvider?.name}</p>
                      </div>
                      <Button 
                        disabled={isShippingLoading} 
@@ -296,4 +299,3 @@ export default function AdminSamplesPage() {
     </div>
   );
 }
-
