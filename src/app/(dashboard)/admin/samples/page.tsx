@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useMemo } from 'react';
 import { Card } from '@/components/ui/card';
@@ -296,3 +296,4 @@ export default function AdminSamplesPage() {
     </div>
   );
 }
+
