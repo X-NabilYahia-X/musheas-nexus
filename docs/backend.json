@@ -1,0 +1,55 @@
+
+{
+  "entities": {
+    "Order": {
+      "title": "Order",
+      "description": "A customer order for Musheas products",
+      "type": "object",
+      "properties": {
+        "orderNumber": { "type": "string", "description": "Display order ID" },
+        "name": { "type": "string", "description": "Customer name" },
+        "phone": { "type": "string", "description": "Customer phone number" },
+        "wilaya": { "type": "string", "description": "Algerian Wilaya (format: ID - Name)" },
+        "total": { "type": "number", "description": "Total price in DA" },
+        "status": { 
+          "type": "string", 
+          "enum": ["new", "confirmed", "shipped", "delivered", "cancelled"],
+          "description": "Current stage of the order" 
+        },
+        "notes": { "type": "string", "description": "Admin notes" },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "product_name": { "type": "string" },
+              "quantity": { "type": "number" },
+              "unit_price": { "type": "number" }
+            }
+          }
+        },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "statusHistory": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "status": { "type": "string" },
+              "timestamp": { "type": "string", "format": "date-time" }
+            }
+          }
+        }
+      },
+      "required": ["name", "phone", "total", "status", "createdAt"]
+    }
+  },
+  "auth": {
+    "providers": ["password"]
+  },
+  "firestore": {
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Collection of orders"
+    }
+  }
+}

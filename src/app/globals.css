@@ -1,0 +1,80 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 188 44% 4%;
+    --foreground: 168 25% 92%;
+    --card: 188 48% 7%;
+    --card-foreground: 168 25% 92%;
+    --popover: 188 48% 7%;
+    --popover-foreground: 168 25% 92%;
+    --primary: 41 53% 62%;
+    --primary-foreground: 188 44% 4%;
+    --secondary: 186 48% 7%;
+    --secondary-foreground: 168 25% 92%;
+    --muted: 168 25% 92% / 0.58;
+    --muted-foreground: 168 25% 92% / 0.58;
+    --accent: 186 39% 52%;
+    --accent-foreground: 188 44% 4%;
+    --destructive: 0 72% 62%;
+    --destructive-foreground: 168 25% 92%;
+    --border: 41 53% 62% / 0.13;
+    --input: 41 53% 62% / 0.25;
+    --ring: 41 53% 62%;
+    --radius: 16px;
+    --chart-1: 41 53% 62%;
+    --chart-2: 186 39% 52%;
+    --chart-3: 151 51% 48%;
+    --chart-4: 0 72% 62%;
+    --chart-5: 41 48% 48%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-headline;
+  }
+}
+
+.gold-gradient {
+  background: linear-gradient(135deg, #d2b26b 0%, #b8903f 100%);
+}
+
+.gold-text-gradient {
+  background: linear-gradient(135deg, #d2b26b 0%, #b8903f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #060e10;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(210,178,107,.13);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(210,178,107,.25);
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}

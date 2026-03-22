@@ -1,0 +1,29 @@
+
+{
+  "placeholderImages": [
+    {
+      "id": "turkey-tail",
+      "description": "Turkey Tail mushroom extract bottle professional biotech",
+      "imageUrl": "https://picsum.photos/seed/turkey/600/400",
+      "imageHint": "mushroom biotech"
+    },
+    {
+      "id": "lions-mane",
+      "description": "Lion's Mane premium biotech packaging",
+      "imageUrl": "https://picsum.photos/seed/lions/600/400",
+      "imageHint": "premium extract"
+    },
+    {
+      "id": "oyster-serum",
+      "description": "Oyster mushroom face serum bottle",
+      "imageUrl": "https://picsum.photos/seed/oyster/600/400",
+      "imageHint": "skincare serum"
+    },
+    {
+      "id": "kefir-cream",
+      "description": "Kefir ferment biotech face cream jar",
+      "imageUrl": "https://picsum.photos/seed/kefir/600/400",
+      "imageHint": "face cream"
+    }
+  ]
+}
